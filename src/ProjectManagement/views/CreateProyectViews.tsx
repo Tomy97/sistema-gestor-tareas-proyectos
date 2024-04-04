@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CreateProyect = () => {
+export const CreateProyectViews = () => {
   return (
     <div>CreateProyect</div>
   )
