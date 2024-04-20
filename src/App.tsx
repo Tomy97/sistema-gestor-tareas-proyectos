@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import { Button } from 'primereact/button';
-function App() {
 
+const App = () => {
   return (
     <>
-      <Button label="Check" icon="pi pi-check" />
+      Hola esto es el app de react
     </>
   )
 }

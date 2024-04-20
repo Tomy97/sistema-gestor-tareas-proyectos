@@ -1,16 +1,16 @@
-import { createBrowserRouter } from "react-router-dom"
-import { ProyectManagmentLayout } from '../ProjectManagement/layouts/ProyectManagmentLayout'
-import { CreateProyectViews } from '../ProjectManagement/views/CreateProyectViews'
+import { createBrowserRouter } from 'react-router-dom'
+import Layout from '../ui/layout/Layout'
+import { HomeViews } from '../views/HomeViews'
 
 createBrowserRouter([
-    {
-        path: "/",
-        element: <ProyectManagmentLayout />,
-        children: [
-            {
-                path: "/",
-                element: <CreateProyectViews />
-            }
-        ]
-    }
+  {
+    path: '/',
+    element: <Layout children={null} />,
+    children: [
+      {
+        path: '/',
+        element: <HomeViews />,
+      },
+    ],
+  },
 ])
