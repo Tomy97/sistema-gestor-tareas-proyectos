@@ -1,12 +1,21 @@
-import React, { ReactNode } from "react"
+import type React from 'react'
+import { Outlet } from 'react-router-dom'
 
-interface LayoutProps {
-  children: ReactNode
-}
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+import { SidebarMenu } from '../components/SidebarMenu'
+
+const Layout: React.FC = () => {
   return (
     <>
-      <main>{children}</main>
+      {/* header */}
+      <div className="grid">
+        <div className="p-col">
+          <SidebarMenu />
+        </div>
+        <div className="p-col">
+          <Outlet />
+        </div>
+      </div>
+      {/* footer */}
     </>
   )
 }
