@@ -6,7 +6,8 @@ import App from "./App"
 import { store } from "./app/store"
 import "primeflex/primeflex.css"
 import "primereact/resources/themes/lara-light-cyan/theme.css"
-import "primeicons/primeicons.css"
+import 'primeicons/primeicons.css'
+import './asset/base.css'
 
 const container = document.getElementById("root")
 
