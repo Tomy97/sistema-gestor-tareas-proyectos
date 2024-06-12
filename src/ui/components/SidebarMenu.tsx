@@ -84,7 +84,10 @@ export const SidebarMenu = () => {
               </ul>
               <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
               <div className="p-3 m-0 flex align-items-center justify-content-between">
-                <span className="text-xs font-bold uppercase">My Proyects</span>
+                <span className="text-xs font-bold uppercase text-">My Projects</span>
+                <Link to='/create-project' className='no-underline'>
+                  <i className='pi pi-plus-circle' />
+                </Link>
               </div>
             </div>
             {userLogged()}
