@@ -2,8 +2,13 @@
 ## Roles
 
 ```
-    - Developer
-    - Manager
+    - Backend Developer
+    - Frontend Developer
+    - QA
+    - Dev Ops
+    - Database
+    - Functional Analyst
+    - Proyect Manager
     - Admin
 ```
 ## Projects Status

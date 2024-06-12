@@ -1,0 +1,39 @@
+{
+    "developers": [
+        {
+            "name": "Dario Lencina",
+            "email": "dario.lencina@test.com",
+            "rol": "Frontend Developer",
+            "proyects": [],
+            "seniority": "Senior"
+        },
+        {
+            "name": "Alejandro Rosas",
+            "email": "alejandro.rosas@test.com",
+            "rol": "Backend Developer",
+            "proyects": [],
+            "seniority": "Semisenior"
+        },
+        {
+            "name": "Julio Cesar",
+            "email": "julio.cesar@test.com",
+            "rol": "Frontend Developer",
+            "proyects": [],
+            "seniority": "Semisenior"
+        },
+        {
+            "name": "Benjamin Franklin",
+            "email": "benjamin.franklin@test.com",
+            "rol": "Backend Developer",
+            "proyects": [],
+            "seniority": "Junior"
+        },
+        {
+            "name": "Oscar Wilde",
+            "email": "oscar.wilde@test.com",
+            "rol": "Backend Developer",
+            "proyects": [],
+            "seniority": "Senior"
+        }
+    ]
+}
