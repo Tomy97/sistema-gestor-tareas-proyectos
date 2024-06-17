@@ -1,10 +1,13 @@
 import { Logo } from '../components/Logo'
-import { Ripple } from 'primereact/ripple'
 import { Avatar } from 'primereact/avatar'
 import type { Menu } from '../types/menu'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames';
+import '../styles/styles.css'
 
 export const SidebarMenu = () => {
+  const [reduceSidebar, setReduceSidebar] = useState<boolean>(false)
   const menu: Menu[] = [
     {
       icon: 'home',
@@ -30,8 +33,8 @@ export const SidebarMenu = () => {
       return (
         <div className="mt-auto">
           <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
-          <a
-            v-ripple
+          <Link
+            to="#"
             className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
           >
             <Avatar
@@ -39,10 +42,14 @@ export const SidebarMenu = () => {
               shape="circle"
             />
             <span className="font-bold">Amy Elsner</span>
-          </a>
+          </Link>
         </div>
       )
     }
+  }
+
+  const toggleSidebarWidth = () => {
+    setReduceSidebar(!reduceSidebar)
   }
 
   return (
@@ -50,19 +57,28 @@ export const SidebarMenu = () => {
       <div className="min-h-screen flex relative lg:static surface-ground">
         <div
           id="app-sidebar-2"
-          className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none"
-          style={{ width: '280px' }}
+          className={classNames(
+            'surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none',
+            { 'sidebar-open': !reduceSidebar, 'sidebar-closed': reduceSidebar },
+          )}
         >
           <div className="flex flex-column h-full">
-            <div className="flex align-items-center justify-content-between p-5 flex-shrink-0">
+            <div
+              className={`flex align-items-center justify-content-between ${reduceSidebar ? 'p-2' : 'p-5'} flex-shrink-0`}
+            >
               <span className="inline-flex align-items-center gap-2">
                 <Logo />
-                <span className="font-bold text-xl text-gray-900">
-                  Project M.
-                </span>
+                {reduceSidebar ? null : (
+                  <span className="font-bold text-xl text-gray-900">
+                    Project M.
+                  </span>
+                )}
               </span>
               <span>
-                <i className="pi pi-angle-double-left cursor-pointer text-700" />
+                <i
+                  className={`pi pi-angle-double-${reduceSidebar ? 'right' : 'left'} cursor-pointer text-700`}
+                  onClick={toggleSidebarWidth}
+                />
               </span>
             </div>
             <div className="overflow-y-auto border-top-1 border-none surface-border">
@@ -75,20 +91,27 @@ export const SidebarMenu = () => {
                         className="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full p-ripple no-underline"
                       >
                         <i className={`pi pi-${elem.icon} mr-2`} />
-                        <span className="font-medium">{elem.label}</span>
-                        <Ripple />
+                        {reduceSidebar ? null : (
+                          <span className="font-medium">{elem.label}</span>
+                        )}
                       </Link>
                     </li>
                   )
                 })}
               </ul>
-              <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
-              <div className="p-3 m-0 flex align-items-center justify-content-between">
-                <span className="text-xs font-bold uppercase text-">My Projects</span>
-                <Link to='/create-project' className='no-underline'>
-                  <i className='pi pi-plus-circle' />
-                </Link>
-              </div>
+              {reduceSidebar ? null : (
+                <>
+                  <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
+                  <div className="p-3 m-0 flex align-items-center justify-content-between">
+                    <span className="text-xs font-bold uppercase text-">
+                      My Projects
+                    </span>
+                    <Link to="/create-project" className="no-underline">
+                      <i className="pi pi-plus-circle" />
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
             {userLogged()}
           </div>

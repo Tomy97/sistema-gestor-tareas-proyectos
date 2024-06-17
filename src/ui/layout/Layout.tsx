@@ -6,12 +6,12 @@ import { SidebarMenu } from '../components/SidebarMenu'
 const Layout: React.FC = () => {
   return (
     <>
-      {/* header */}
+      {/* !TODO: hacer header para mobile */}
       <div className="grid">
-        <div className="p-col">
+        <div className="col-fixed hidden lg:block">
           <SidebarMenu />
         </div>
-        <div className="p-col">
+        <div className="col">
           <Outlet />
         </div>
       </div>

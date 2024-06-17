@@ -1,0 +1,147 @@
+{
+  "developers": [
+    {
+      "name": "Dario Lencina",
+      "email": "dario.lencina@test.com",
+      "rol": "Frontend Developer",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Alejandro Rosas",
+      "email": "alejandro.rosas@test.com",
+      "rol": "Backend Developer",
+      "proyects": [],
+      "seniority": "Semisenior"
+    },
+    {
+      "name": "Julio Cesar",
+      "email": "julio.cesar@test.com",
+      "rol": "Frontend Developer",
+      "proyects": [],
+      "seniority": "Semisenior"
+    },
+    {
+      "name": "Benjamin Franklin",
+      "email": "benjamin.franklin@test.com",
+      "rol": "Backend Developer",
+      "proyects": [],
+      "seniority": "Junior"
+    },
+    {
+      "name": "Oscar Wilde",
+      "email": "oscar.wilde@test.com",
+      "rol": "Backend Developer",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Ada Lovelace",
+      "email": "ada.lovelace@test.com",
+      "rol": "Dev Ops",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Grace Hopper",
+      "email": "grace.hopper@test.com",
+      "rol": "Database",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Margaret Hamilton",
+      "email": "margaret.hamilton@test.com",
+      "rol": "Functional Analyst",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Tim Berners-Lee",
+      "email": "tim.berners-lee@test.com",
+      "rol": "Project Manager",
+      "proyects": [],
+      "seniority": "Senior"
+    }
+  ],
+  "testers": [
+    {
+      "name": "Albert Einstein",
+      "email": "albeteinstein@test.com",
+      "rol": "QA",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Marie Curie",
+      "email": "marie.curie@test.com",
+      "rol": "QA",
+      "proyects": [],
+      "seniority": "Senior"
+    }
+  ],
+  "devops": [
+    {
+      "name": "Linus Torvalds",
+      "email": "linus.torvalds@test.com",
+      "rol": "Dev Ops",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Katherine Johnson",
+      "email": "katherine.johnson@test.com",
+      "rol": "Dev Ops",
+      "proyects": [],
+      "seniority": "Semisenior"
+    }
+  ],
+  "database": [
+    {
+      "name": "Edgar Codd",
+      "email": "edgar.codd@test.com",
+      "rol": "Database",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Michael Stonebraker",
+      "email": "michael.stonebraker@test.com",
+      "rol": "Database",
+      "proyects": [],
+      "seniority": "Junior"
+    }
+  ],
+  "functionalAnalysts": [
+    {
+      "name": "Hedy Lamarr",
+      "email": "hedy.lamarr@test.com",
+      "rol": "Functional Analyst",
+      "proyects": [],
+      "seniority": "Semisenior"
+    },
+    {
+      "name": "Dennis Ritchie",
+      "email": "dennis.ritchie@test.com",
+      "rol": "Functional Analyst",
+      "proyects": [],
+      "seniority": "Senior"
+    }
+  ],
+  "projectManagers": [
+    {
+      "name": "Elon Musk",
+      "email": "elon.musk@test.com",
+      "rol": "Project Manager",
+      "proyects": [],
+      "seniority": "Senior"
+    },
+    {
+      "name": "Steve Jobs",
+      "email": "steve.jobs@test.com",
+      "rol": "Project Manager",
+      "proyects": [],
+      "seniority": "Semisenior"
+    }
+  ]
+}
