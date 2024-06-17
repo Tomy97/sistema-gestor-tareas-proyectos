@@ -49,9 +49,9 @@ export const CardFromProject = () => {
           </div>
           <div className="col-12 md:col-4">
             <MemberMultiSelect
-              label="Desarrolladores"
+              label="Seleccionar Miembros"
               value={formik.values.members}
-              onChange={(e) => formik.setFieldValue('members', e)}
+              onChange={(e) => formik.setFieldValue('members', e.value)}
             />
             {formik.touched.members && formik.errors.members ? (
               <small className="p-error">{formik.errors.members}</small>
