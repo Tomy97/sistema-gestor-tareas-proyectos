@@ -1,10 +1,15 @@
-import { Logo } from '../components/Logo'
-import { Avatar } from 'primereact/avatar'
-import type { Menu } from '../types/menu'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import classNames from 'classnames';
+import classNames from 'classnames'
 import '../styles/styles.css'
+
+import { Avatar } from 'primereact/avatar'
+
+import type { Menu } from '../types/menu'
+
+import { BulletColor } from './BulletColor'
+import { Logo } from '../components/Logo'
+
 
 export const SidebarMenu = () => {
   const [reduceSidebar, setReduceSidebar] = useState<boolean>(false)
@@ -51,6 +56,9 @@ export const SidebarMenu = () => {
   const toggleSidebarWidth = () => {
     setReduceSidebar(!reduceSidebar)
   }
+
+  const projects = localStorage.getItem('projects')
+  const projectList = JSON.parse(projects || '[]')
 
   return (
     <div className="card">
@@ -110,6 +118,22 @@ export const SidebarMenu = () => {
                       <i className="pi pi-plus-circle" />
                     </Link>
                   </div>
+
+                  <ul className="list-none p-3 m-0">
+                    {projectList.map((project: any) => {
+                      return (
+                        <li key={project.name}>
+                          <Link
+                            to={`/projects/${project.id}`}
+                            className="flex align-items-center cursor-pointer py-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full p-ripple no-underline"
+                          >
+                            <BulletColor backgroundColor={project.color} />
+                            <span className="font-medium">{project.name}</span>
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
                 </>
               )}
             </div>

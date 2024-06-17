@@ -26,13 +26,13 @@ export const routes = createBrowserRouter([
         element: <TeamViews />,
       },
       {
-        path: '/projects',
+        path: '/projects/:id',
         element: <ProjectsViews />,
       },
       {
         path: '/settings',
         element: <SettingsViews />,
-      }
+      },
     ],
   },
   {
@@ -55,6 +55,6 @@ export const routes = createBrowserRouter([
   },
   {
     path: '*',
-    element: <NotFoundViews /> ,
-  }
+    element: <NotFoundViews />,
+  },
 ])

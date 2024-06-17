@@ -5,13 +5,27 @@ import { Button } from 'primereact/button'
 import { MemberMultiSelect } from './input/MemberMultiSelect'
 import { Calendar } from 'primereact/calendar'
 import * as Yup from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid';
+
+const getRandomColor = () => {
+  const letters = '0123456789ABCDEF'
+  let color = '#'
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  return color
+}
 
 export const CardFromProject = () => {
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
+      id: uuidv4(),
       name: '',
       members: [],
       date: null,
+      color: getRandomColor(),
     },
     validationSchema: Yup.object({
       name: Yup.string().required('El nombre del proyecto es requerido'),
@@ -21,7 +35,13 @@ export const CardFromProject = () => {
       date: Yup.date().required('Debes seleccionar una fecha'),
     }),
     onSubmit: (values) => {
-      console.log(values)
+      const existingProjects = JSON.parse(
+        localStorage.getItem('projects') || '[]',
+      )
+      const newProjects = [...existingProjects, values]
+      localStorage.setItem('projects', JSON.stringify(newProjects))
+      formik.resetForm()
+      navigate('/')
     },
   })
 

@@ -9,3 +9,9 @@
 .sidebar-closed {
   width: 80px;
 }
+
+.bullet_class {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
