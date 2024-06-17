@@ -63,7 +63,6 @@ export const CardFromProject = () => {
               <Calendar
                 value={formik.values.date}
                 onChange={(e) => formik.setFieldValue('date', e.value)}
-                onBlur={formik.handleBlur}
                 name="date"
                 dateFormat="dd/mm/yy"
                 showIcon
