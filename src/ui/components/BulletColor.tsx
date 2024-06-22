@@ -1,4 +1,4 @@
-import '../styles/styles.css'
+import '../../asset/base.css'
 
 interface BulletColorProps {
   backgroundColor: string

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import '../styles/styles.css'
+import '../../asset/base.css'
 
 import { Avatar } from 'primereact/avatar'
 
@@ -9,7 +9,6 @@ import type { Menu } from '../types/menu'
 
 import { BulletColor } from './BulletColor'
 import { Logo } from '../components/Logo'
-
 
 export const SidebarMenu = () => {
   const [reduceSidebar, setReduceSidebar] = useState<boolean>(false)
@@ -96,7 +95,7 @@ export const SidebarMenu = () => {
                     <li key={elem.label}>
                       <Link
                         to={elem.to}
-                        className="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full p-ripple no-underline"
+                        className="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 hover:text-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
                       >
                         <i className={`pi pi-${elem.icon} mr-2`} />
                         {reduceSidebar ? null : (
@@ -111,7 +110,7 @@ export const SidebarMenu = () => {
                 <>
                   <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
                   <div className="p-3 m-0 flex align-items-center justify-content-between">
-                    <span className="text-xs font-bold uppercase text-">
+                    <span className="text-xs font-bold uppercase text-secundario">
                       My Projects
                     </span>
                     <Link to="/create-project" className="no-underline">
@@ -125,10 +124,15 @@ export const SidebarMenu = () => {
                         <li key={project.name}>
                           <Link
                             to={`/projects/${project.id}`}
-                            className="flex align-items-center cursor-pointer py-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full p-ripple no-underline"
+                            className="flex align-items-center justify-content-between cursor-pointer py-3 border-round text-700 bg-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
                           >
-                            <BulletColor backgroundColor={project.color} />
-                            <span className="font-medium">{project.name}</span>
+                            <div className="flex align-items-center">
+                              <BulletColor backgroundColor={project.color} />
+                              <span className="font-medium">
+                                {project.name}
+                              </span>
+                            </div>
+                            <i className="pi pi-ellipsis-h" />
                           </Link>
                         </li>
                       )

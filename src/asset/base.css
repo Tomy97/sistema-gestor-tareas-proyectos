@@ -5,3 +5,67 @@ html {
   box-sizing: border-box;
   overflow: hidden;
 }
+
+#app-sidebar-2 {
+  transition: width 0.5s ease;
+}
+
+.sidebar-open {
+  width: 280px;
+}
+
+.sidebar-closed {
+  width: 80px;
+}
+
+.bullet_class {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.text-primario {
+  color: #0d062d !important;
+}
+
+.text-secundario {
+  color: #787486 !important;
+}
+
+.text-terciario {
+  color: #5030e5 !important;
+}
+
+.bg-primario:hover {
+  background-color: rgba(80, 48, 229, 0.08);
+  color: #0d062d !important;
+  font-weight: bold;
+}
+
+.bg-pills {
+  background-color: #5130e5;
+}
+
+.column {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.column h2 {
+  padding: 8px;
+}
+
+.task {
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #d8727ca4;
+  display: flex;
+}
+

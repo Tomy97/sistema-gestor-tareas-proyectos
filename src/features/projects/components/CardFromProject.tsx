@@ -6,7 +6,7 @@ import { MemberMultiSelect } from './input/MemberMultiSelect'
 import { Calendar } from 'primereact/calendar'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 const getRandomColor = () => {
   const letters = '0123456789ABCDEF'
@@ -19,6 +19,7 @@ const getRandomColor = () => {
 
 export const CardFromProject = () => {
   const navigate = useNavigate()
+  const toggleGoBack = () => navigate('/')
   const formik = useFormik({
     initialValues: {
       id: uuidv4(),
@@ -96,8 +97,16 @@ export const CardFromProject = () => {
             </div>
           </div>
         </div>
-        <div className="grid">
-          <div className="col-12">
+        <div className="grid justify-content-between">
+          <div className="col-12 md:col-3">
+            <Button
+              label="Volver"
+              className="w-full"
+              severity="danger"
+              onClick={toggleGoBack}
+            />
+          </div>
+          <div className="col-12 md:col-4">
             <Button label="Crear Proyecto" type="submit" className="w-full" />
           </div>
         </div>
