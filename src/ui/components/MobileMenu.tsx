@@ -23,18 +23,8 @@ export const MobileMenu = () => {
     {
       icon: 'home',
       label: 'Dashboard',
-      to: '/',
-    },
-    {
-      icon: 'users',
-      label: 'Team',
-      to: '/team',
-    },
-    {
-      icon: 'cog',
-      label: 'Settings',
-      to: '/settings',
-    },
+      to: '/'
+    }
   ]
 
   const projects = localStorage.getItem('projects')
@@ -67,9 +57,11 @@ export const MobileMenu = () => {
         className="w-full"
         content={({ closeIconRef, hide }) => (
           <div className="min-h-screen flex relative lg:static surface-ground">
-            <div className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none w-full">
+            <div
+              className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none w-full">
               <div className="flex flex-column h-full">
-                <div className="flex align-items-center justify-content-between p-4 flex-shrink-0 border-bottom-1 border-none surface-border">
+                <div
+                  className="flex align-items-center justify-content-between p-4 flex-shrink-0 border-bottom-1 border-none surface-border">
                   <div className="flex align-items-center">
                     <ComponentLogo />
                   </div>
@@ -106,24 +98,28 @@ export const MobileMenu = () => {
                     <i className="pi pi-plus-circle" />
                   </Link>
                 </div>
-                <ul className="list-none p-3 m-0">
-                  {projectList.map((project: any) => {
-                    return (
-                      <li key={project.name}>
-                        <Link
-                          to={`/projects/${project.id}`}
-                          className="flex align-items-center justify-content-between cursor-pointer py-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full p-ripple no-underline"
-                        >
-                          <div className="flex align-items-center">
-                            <BulletColor backgroundColor={project.color} />
-                            <span className="font-medium">{project.name}</span>
-                          </div>
-                          <i className="pi pi-ellipsis-h" />
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
+                {
+                  projectList.length > 0 ? (
+                    <ul className="list-none p-3 m-0">
+                      {projectList.map((project: any) => {
+                        return (
+                          <li key={project.name}>
+                            <Link
+                              to={`/projects/${project.id}`}
+                              className="flex align-items-center justify-content-between cursor-pointer py-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full p-ripple no-underline"
+                            >
+                              <div className="flex align-items-center">
+                                <BulletColor backgroundColor={project.color} />
+                                <span className="font-medium">{project.name}</span>
+                              </div>
+                              <i className="pi pi-ellipsis-h" />
+                            </Link>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  ) : null
+                }
               </div>
             </div>
           </div>

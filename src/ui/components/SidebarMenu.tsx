@@ -16,18 +16,8 @@ export const SidebarMenu = () => {
     {
       icon: 'home',
       label: 'Dashboard',
-      to: '/',
-    },
-    {
-      icon: 'users',
-      label: 'Team',
-      to: '/team',
-    },
-    {
-      icon: 'cog',
-      label: 'Settings',
-      to: '/settings',
-    },
+      to: '/'
+    }
   ]
 
   const isLogged = false
@@ -66,7 +56,7 @@ export const SidebarMenu = () => {
           id="app-sidebar-2"
           className={classNames(
             'surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none',
-            { 'sidebar-open': !reduceSidebar, 'sidebar-closed': reduceSidebar },
+            { 'sidebar-open': !reduceSidebar, 'sidebar-closed': reduceSidebar }
           )}
         >
           <div className="flex flex-column h-full">
@@ -117,27 +107,28 @@ export const SidebarMenu = () => {
                       <i className="pi pi-plus-circle" />
                     </Link>
                   </div>
-
-                  <ul className="list-none p-3 m-0">
-                    {projectList.map((project: any) => {
-                      return (
-                        <li key={project.name}>
-                          <Link
-                            to={`/projects/${project.id}`}
-                            className="flex align-items-center justify-content-between cursor-pointer py-3 border-round text-700 bg-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
-                          >
-                            <div className="flex align-items-center">
-                              <BulletColor backgroundColor={project.color} />
-                              <span className="font-medium">
-                                {project.name}
-                              </span>
-                            </div>
-                            <i className="pi pi-ellipsis-h" />
-                          </Link>
-                        </li>
-                      )
-                    })}
-                  </ul>
+                  {
+                    projectList.length > 0 ? (
+                      <ul className="list-none p-3 m-0">
+                        {projectList.map((project: any) => {
+                          return (
+                            <li key={project.name}>
+                              <Link
+                                to={`/projects/${project.id}`}
+                                className="flex align-items-center justify-content-between cursor-pointer py-3 border-round text-700 hover:surface-100 hover:text-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
+                              >
+                                <div className="flex align-items-center">
+                                  <BulletColor backgroundColor={project.color} />
+                                  <span className="font-medium">{project.name}</span>
+                                </div>
+                                <i className="pi pi-ellipsis-h" />
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    ) : null
+                  }
                 </>
               )}
             </div>

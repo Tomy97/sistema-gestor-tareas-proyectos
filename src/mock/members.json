@@ -1,6 +1,7 @@
 {
   "developers": [
     {
+      "id": "1",
       "name": "Dario Lencina",
       "email": "dario.lencina@test.com",
       "rol": "Frontend Developer",
@@ -8,6 +9,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "2",
       "name": "Alejandro Rosas",
       "email": "alejandro.rosas@test.com",
       "rol": "Backend Developer",
@@ -15,6 +17,7 @@
       "seniority": "Semisenior"
     },
     {
+      "id": "3",
       "name": "Julio Cesar",
       "email": "julio.cesar@test.com",
       "rol": "Frontend Developer",
@@ -22,6 +25,7 @@
       "seniority": "Semisenior"
     },
     {
+      "id": "4",
       "name": "Benjamin Franklin",
       "email": "benjamin.franklin@test.com",
       "rol": "Backend Developer",
@@ -29,6 +33,7 @@
       "seniority": "Junior"
     },
     {
+      "id": "5",
       "name": "Oscar Wilde",
       "email": "oscar.wilde@test.com",
       "rol": "Backend Developer",
@@ -36,6 +41,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "6",
       "name": "Ada Lovelace",
       "email": "ada.lovelace@test.com",
       "rol": "Dev Ops",
@@ -43,6 +49,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "7",
       "name": "Grace Hopper",
       "email": "grace.hopper@test.com",
       "rol": "Database",
@@ -50,6 +57,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "8",
       "name": "Margaret Hamilton",
       "email": "margaret.hamilton@test.com",
       "rol": "Functional Analyst",
@@ -57,6 +65,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "9",
       "name": "Tim Berners-Lee",
       "email": "tim.berners-lee@test.com",
       "rol": "Project Manager",
@@ -66,6 +75,7 @@
   ],
   "testers": [
     {
+      "id": "10",
       "name": "Albert Einstein",
       "email": "albeteinstein@test.com",
       "rol": "QA",
@@ -73,6 +83,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "11",
       "name": "Marie Curie",
       "email": "marie.curie@test.com",
       "rol": "QA",
@@ -82,6 +93,7 @@
   ],
   "devops": [
     {
+      "id": "12",
       "name": "Linus Torvalds",
       "email": "linus.torvalds@test.com",
       "rol": "Dev Ops",
@@ -89,6 +101,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "13",
       "name": "Katherine Johnson",
       "email": "katherine.johnson@test.com",
       "rol": "Dev Ops",
@@ -98,6 +111,7 @@
   ],
   "database": [
     {
+      "id": "14",
       "name": "Edgar Codd",
       "email": "edgar.codd@test.com",
       "rol": "Database",
@@ -105,6 +119,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "15",
       "name": "Michael Stonebraker",
       "email": "michael.stonebraker@test.com",
       "rol": "Database",
@@ -114,6 +129,7 @@
   ],
   "functionalAnalysts": [
     {
+      "id": "16",
       "name": "Hedy Lamarr",
       "email": "hedy.lamarr@test.com",
       "rol": "Functional Analyst",
@@ -121,6 +137,7 @@
       "seniority": "Semisenior"
     },
     {
+      "id": "17",
       "name": "Dennis Ritchie",
       "email": "dennis.ritchie@test.com",
       "rol": "Functional Analyst",
@@ -130,6 +147,7 @@
   ],
   "projectManagers": [
     {
+      "id": "18",
       "name": "Elon Musk",
       "email": "elon.musk@test.com",
       "rol": "Project Manager",
@@ -137,6 +155,7 @@
       "seniority": "Senior"
     },
     {
+      "id": "19",
       "name": "Steve Jobs",
       "email": "steve.jobs@test.com",
       "rol": "Project Manager",

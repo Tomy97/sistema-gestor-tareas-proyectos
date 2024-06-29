@@ -1,18 +1,18 @@
 import { MultiSelect } from 'primereact/multiselect'
 import { useGroupedMembers } from '../../hooks/useMembersHooks'
 import { GroupItemTemplate } from '../GroupItemTemplate'
-import type { Member } from '../../../../types/member'
+import type { T } from '../../../../types/Generic'
 
 interface MemberMultiSelectProps {
   label: string
-  value: Member[] | null
+  value: T[] | null
   onChange: (e: any) => void
 }
 
 export const MemberMultiSelect = (props: MemberMultiSelectProps) => {
   const groupedMembers = useGroupedMembers
 
-  const membersTemplate = (option: Member) => {
+  const membersTemplate = (option: T) => {
     return (
       <div className="flex align-items-center">
         <div>

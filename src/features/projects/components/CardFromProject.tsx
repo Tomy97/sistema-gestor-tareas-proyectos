@@ -7,18 +7,13 @@ import { Calendar } from 'primereact/calendar'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
-
-const getRandomColor = () => {
-  const letters = '0123456789ABCDEF'
-  let color = '#'
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)]
-  }
-  return color
-}
+import { useBackgroundColor } from '../hooks/useBackgroundColor'
+import { useAppDispatch } from '../../../app/hooks'
+import { setProject } from '../slices/store'
 
 export const CardFromProject = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const toggleGoBack = () => navigate('/')
   const formik = useFormik({
     initialValues: {
@@ -26,24 +21,20 @@ export const CardFromProject = () => {
       name: '',
       members: [],
       date: null,
-      color: getRandomColor(),
+      color: useBackgroundColor()
     },
     validationSchema: Yup.object({
       name: Yup.string().required('El nombre del proyecto es requerido'),
       members: Yup.array()
         .min(1, 'Debes seleccionar al menos un miembro')
         .required('Debes seleccionar al menos un miembro'),
-      date: Yup.date().required('Debes seleccionar una fecha'),
+      date: Yup.date().required('Debes seleccionar una fecha')
     }),
     onSubmit: (values) => {
-      const existingProjects = JSON.parse(
-        localStorage.getItem('projects') || '[]',
-      )
-      const newProjects = [...existingProjects, values]
-      localStorage.setItem('projects', JSON.stringify(newProjects))
+      dispatch(setProject(values))
       formik.resetForm()
       navigate('/')
-    },
+    }
   })
 
   return (
@@ -75,7 +66,7 @@ export const CardFromProject = () => {
               onChange={(e) => formik.setFieldValue('members', e.value)}
             />
             {formik.touched.members && formik.errors.members ? (
-              <small className="p-error">{formik.errors.members}</small>
+              <small className="p-error">{ formik.errors.members.length } </small>
             ) : null}
           </div>
           <div className="col-12 md:col-4">

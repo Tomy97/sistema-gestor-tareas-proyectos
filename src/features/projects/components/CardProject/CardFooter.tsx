@@ -1,9 +1,9 @@
 import { Avatar } from 'primereact/avatar'
 import { AvatarGroup } from 'primereact/avatargroup'
-import type { Member } from '../../../../types/member'
+import type { T } from '../../../../types/Generic'
 
 interface CardFooterProps {
-  memberList: Member[]
+  memberList: T[]
 }
 export const CardFooter = ({ memberList }: CardFooterProps) => {
   return (
