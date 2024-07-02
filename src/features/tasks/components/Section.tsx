@@ -36,8 +36,8 @@ export const Section = ({
   }
   return (
     <div
-      style={{ backgroundColor: '#F5F5F5', width: 354 }}
-      className="border-round"
+      style={{ backgroundColor: '#F5F5F5' }}
+      className="border-round w-full xl:w-23rem"
     >
       <Header text={text} status={status} count={taskToMap.length} />
       {

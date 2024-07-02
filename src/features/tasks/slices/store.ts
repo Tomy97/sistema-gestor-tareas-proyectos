@@ -30,8 +30,11 @@ export const useTaskSlice = createSlice({
     },
     setDone: (state: InitialStateI, action: PayloadAction<Task[]>) => {
       state.done = action.payload
+    },
+    createTask: (state: InitialStateI, action: PayloadAction<Task>) => {
+
     }
   }
 })
 
-export const { setVisibility, setDone, setInProgress, setTodo } = useTaskSlice.actions
+export const { setVisibility, setDone, setInProgress, setTodo, createTask } = useTaskSlice.actions

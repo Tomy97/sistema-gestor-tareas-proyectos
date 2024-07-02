@@ -4,15 +4,19 @@ import { useParams } from 'react-router-dom'
 import { TaskList } from '../../tasks/components/TaskList'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { Project } from '../../../types/Project'
-import { useEffect } from 'react'
-import { getProject } from '../slices/store'
 import type { T } from '../../../types/Generic'
+import { useEffect } from 'react'
+import { getProjects } from '../slices/store'
 
 export const ProjectsViews = () => {
   const { id } = useParams()
-  const projectStore = useAppSelector((state) => state.projects)
+  const projectStore: Project[] = useAppSelector((state) => state.projects)
   const dispatch = useAppDispatch()
-  const project: Project | undefined = projectStore.find((project) => project.id === id)
+  const project: Project | undefined = projectStore.find((project: Project): boolean => project.id === id)
+
+  useEffect(() => {
+    dispatch(getProjects())
+  }, [dispatch])
 
   if (projectStore.length === 0) {
     return <div className="p-5">No hay proyectos</div>
@@ -20,13 +24,8 @@ export const ProjectsViews = () => {
     return <div className="p-5">Proyecto no encontrado</div>
   }
 
-  const membersToShow = project.members.slice(0, 4)
-  const remainingMembersCount = project.members.length - 4
-
-  useEffect(() => {
-    dispatch(getProject())
-  }, [dispatch])
-
+  const membersToShow: T[] = project?.members.slice(0, 4)
+  const remainingMembersCount: number = project?.members.length - 4
   return (
     <div className="p-5 w-full">
       <div className="flex justify-content-between mb-5">
@@ -63,7 +62,7 @@ export const ProjectsViews = () => {
           </AvatarGroup>
         </div>
       </div>
-      <TaskList />
+      <TaskList id={id ? id : '0' } />
     </div>
   )
 }

@@ -3,13 +3,17 @@ import { Section } from './Section'
 import { useAppSelector } from '../../../app/hooks'
 import { CrateTaskDialog } from './CreateTaskDialog'
 
-export const TaskList: React.FC = () => {
-  const statuses = ['todo', 'inProgress', 'done']
+interface TaskListProp {
+  id: string
+}
+
+export const TaskList: React.FC<{ id: string }> = ({ id }: TaskListProp) => {
+  const statuses: string[] = ['todo', 'inProgress', 'done']
   const taskStore = useAppSelector(({ tasks }) => tasks)
 
   return (
     <>
-      <div className="flex gap-8 justify-content-center">
+      <div className="block xl:flex gap-8 justify-content-center">
         {statuses.map((status, index) => (
           <Section
             key={index}
@@ -21,7 +25,7 @@ export const TaskList: React.FC = () => {
         ))}
       </div>
       {
-        taskStore.visibility ? <CrateTaskDialog /> : null
+        taskStore.visibility ? <CrateTaskDialog id={id} /> : null
       }
     </>
   )

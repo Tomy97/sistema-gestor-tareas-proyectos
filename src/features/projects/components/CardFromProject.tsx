@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { useBackgroundColor } from '../hooks/useBackgroundColor'
 import { useAppDispatch } from '../../../app/hooks'
 import { setProject } from '../slices/store'
+import membersMock from '../../../mock/members.json'
 
 export const CardFromProject = () => {
   const navigate = useNavigate()
@@ -36,6 +37,7 @@ export const CardFromProject = () => {
       navigate('/')
     }
   })
+  const { developers } = membersMock
 
   return (
     <Card title="Nuevo Proyecto">
@@ -63,7 +65,12 @@ export const CardFromProject = () => {
             <MemberMultiSelect
               label="Seleccionar Miembros"
               value={formik.values.members}
+              developerOption={developers}
               onChange={(e) => formik.setFieldValue('members', e.value)}
+              customClass={
+                formik.touched.members && formik.errors.members
+                ? 'p-invalid' : ''
+              }
             />
             {formik.touched.members && formik.errors.members ? (
               <small className="p-error">{ formik.errors.members.length } </small>

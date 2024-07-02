@@ -13,10 +13,14 @@ export const useProjectSlice = createSlice({
       localStorage.setItem('projects', JSON.stringify(state))
       return state
     },
-    getProject: (state) => {
-      console.log('getProject')
+    getProjects: (state) => {
+      const projects = localStorage.getItem('projects')
+      if (projects) {
+        return JSON.parse(projects)
+      }
+      return state
     }
   }
 })
 
-export const { setProject, getProject } = useProjectSlice.actions
+export const { setProject, getProjects} = useProjectSlice.actions

@@ -2,15 +2,19 @@ import { MultiSelect } from 'primereact/multiselect'
 import { useGroupedMembers } from '../../hooks/useMembersHooks'
 import { GroupItemTemplate } from '../GroupItemTemplate'
 import type { T } from '../../../../types/Generic'
+import { DeveloperProject } from '../../../../types/DeveloperProject'
+import { MembersGroup } from '../../../../types/Member'
 
 interface MemberMultiSelectProps {
   label: string
   value: T[] | null
+  developerOption: DeveloperProject[]
   onChange: (e: any) => void
+  customClass: string
 }
 
 export const MemberMultiSelect = (props: MemberMultiSelectProps) => {
-  const groupedMembers = useGroupedMembers
+  const groupedMembers: MembersGroup[] = useGroupedMembers(props.developerOption)
 
   const membersTemplate = (option: T) => {
     return (
@@ -35,7 +39,7 @@ export const MemberMultiSelect = (props: MemberMultiSelectProps) => {
         itemTemplate={membersTemplate}
         optionGroupTemplate={GroupItemTemplate}
         display="chip"
-        className="w-full"
+        className={`'w-full' ${props.customClass}`}
       />
     </div>
   )
