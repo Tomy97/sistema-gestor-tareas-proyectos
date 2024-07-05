@@ -9,13 +9,13 @@ const Layout: React.FC = () => {
     <>
       {/* !TODO: hacer header para mobile */}
       <div className="grid">
-        <div className="col-fixed hidden lg:block">
+        <div className="col-fixed hidden xl:block">
           <SidebarMenu />
         </div>
         <div className="col-12 block p-0 lg:hidden">
           <MobileMenu />
         </div>
-        <div className="col-12 lg:col">
+        <div className="col-12 xl:col">
           <Outlet />
         </div>
       </div>

@@ -1,50 +1,41 @@
 import { Header } from './Header'
 import { CardProjectTask } from './CardTasks/CardProjectTask'
 import { Task } from '../../../types/Task'
-// import { T } from '../../../types/Generic'
 
 interface SectionProps {
-  todo: Task[]
-  inProgress: Task[]
-  done: Task[]
+  tasks: Task[]
   status: string
   //memeberList: T[]
 }
 
 export const Section = ({
                           status,
-                          todo,
-                          inProgress,
-                          done,
+                          tasks
                           // memeberList
                         }: SectionProps) => {
   const text: string =
-    status === 'todo'
+    status === 'to-do'
       ? 'Por Hacer'
-      : status === 'inProgress'
+      : status === 'in-progress'
         ? 'En Progreso'
         : 'Hecho'
 
-  let taskToMap = todo
 
-  if (status === 'inProgress') {
-    taskToMap = inProgress
-  }
+  const taskToMap: Task[] = tasks.filter((task: Task): boolean => task.status === status)
 
-  if (status === 'done') {
-    taskToMap = done
-  }
   return (
     <div
       style={{ backgroundColor: '#F5F5F5' }}
-      className="border-round w-full xl:w-23rem"
+      className="border-round w-full xxl:w-23rem"
     >
       <Header text={text} status={status} count={taskToMap.length} />
-      {
-        taskToMap.map((task) => (
-          <CardProjectTask task={task}  />
-        ))
-      }
+      <div className="flex align-items-center flex-column justify-content-center">
+        {
+          taskToMap.map((task: Task) => (
+            <CardProjectTask key={task.id} task={task} />
+          ))
+        }
+      </div>
     </div>
   )
 }

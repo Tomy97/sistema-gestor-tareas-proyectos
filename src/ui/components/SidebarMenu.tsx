@@ -109,13 +109,13 @@ export const SidebarMenu = () => {
                   </div>
                   {
                     projectList.length > 0 ? (
-                      <ul className="list-none p-3 m-0">
+                      <ul className="list-none py-3 pl-0 m-0">
                         {projectList.map((project: any) => {
                           return (
                             <li key={project.name}>
                               <Link
                                 to={`/projects/${project.id}`}
-                                className="flex align-items-center justify-content-between cursor-pointer py-3 border-round text-700 hover:surface-100 hover:text-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
+                                className="flex align-items-center justify-content-between cursor-pointer py-3 px-3 border-round text-700 hover:surface-100 hover:text-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
                               >
                                 <div className="flex align-items-center">
                                   <BulletColor backgroundColor={project.color} />

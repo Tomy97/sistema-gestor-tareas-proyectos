@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog } from 'primereact/dialog'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { setVisibility } from '../slices/store'
+import { createTask, setVisibility } from '../slices/store'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Dropdown } from 'primereact/dropdown'
@@ -9,19 +9,23 @@ import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { MemberMultiSelect } from '../../projects/components/input/MemberMultiSelect'
 import { Project } from '../../../types/Project'
-import { DeveloperProject } from '../../../types/DeveloperProject'
 import { Button } from 'primereact/button'
+import { v4 as uuidv4 } from 'uuid'
+import { Task } from '../../../types/Task'
 
 interface CreateTaskDialigProp {
   id: string
 }
 
 const initialValues = {
+  id: uuidv4(),
   name: '',
   description: '',
   developerAssigned: null,
   priority: '',
-  status: ''
+  status: '',
+  dateCreated: new Date().toDateString(),
+  dateUpdated: new Date().toDateString()
 }
 
 const validationSchema = Yup.object({
@@ -29,13 +33,7 @@ const validationSchema = Yup.object({
   description: Yup.string().required('La descripción de la tarea es requerida'),
   priority: Yup.string().required('Debes seleccionar una prioridad'),
   status: Yup.string().required('Debes seleccionar un estado'),
-  developerAssigned: Yup.array()
-    .of(Yup.object().shape({
-      id: Yup.string().required('El ID es requerido'),
-      name: Yup.string().required('El nombre es requerido')
-    }))
-    .required('Debes asignar al menos un desarrollador')
-    .min(1, 'Debes asignar al menos un desarrollador')
+  developerAssigned: Yup.object().required('Debes seleccionar al menos un miembro')
 })
 
 export const CrateTaskDialog = ({ id }: CreateTaskDialigProp) => {
@@ -51,7 +49,11 @@ export const CrateTaskDialog = ({ id }: CreateTaskDialigProp) => {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values)
+      dispatch(createTask({
+        projectId: id,
+        task: values
+      }))
+      handleCloseDialog(false)
     }
   })
 
@@ -174,7 +176,7 @@ export const CrateTaskDialog = ({ id }: CreateTaskDialigProp) => {
         </div>
         <div className="grid mt-2 justify-content-end">
           <div className="col-3">
-            <Button label="Crear Proyecto" className="bg-pills border-none" />
+            <Button type="submit" label="Crear Proyecto" className="bg-pills border-none" />
           </div>
         </div>
       </form>

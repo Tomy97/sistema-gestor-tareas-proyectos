@@ -5,9 +5,10 @@ export type Task = {
   name: string
   description: string
   status: string
-  dateCreated: Date
-  dateUpdated: Date
-  developersAssigned: T[]
+  dateCreated: string
+  dateUpdated: string
+  developerAssigned: T | null
   image?: string
-  rol: string[]
+  priority: string
+  rol?: string[]
 }

@@ -21,6 +21,7 @@ export const CardFromProject = () => {
       id: uuidv4(),
       name: '',
       members: [],
+      tasks: [],
       date: null,
       color: useBackgroundColor()
     },
@@ -66,6 +67,7 @@ export const CardFromProject = () => {
               label="Seleccionar Miembros"
               value={formik.values.members}
               developerOption={developers}
+              isMultiple
               onChange={(e) => formik.setFieldValue('members', e.value)}
               customClass={
                 formik.touched.members && formik.errors.members

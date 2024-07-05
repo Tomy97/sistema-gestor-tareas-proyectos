@@ -19,9 +19,9 @@ export const Header = ({ text, status, count }: HeaderProps) => {
   }
 
   useEffect(() => {
-    if (status === 'todo') {
+    if (status === 'to-do') {
       setBulletColor('#5030E5')
-    } else if (status === 'inProgress') {
+    } else if (status === 'in-progress') {
       setBulletColor('#FFB946')
     } else {
       setBulletColor('#27AE60')
@@ -40,7 +40,7 @@ export const Header = ({ text, status, count }: HeaderProps) => {
             style={{ background: '#E0E0E0', color: '#625F6D' }}
           />
         </div>
-        {status === 'todo' ? (
+        {status === 'to-do' ? (
           <i className="pi pi-plus-circle text-terciario cursor-pointer" onClick={e => handleOpenDialog(true)} />
         ) : null}
       </div>
