@@ -29,7 +29,7 @@ export const ProjectsViews = () => {
   return (
     <div className="p-5 w-full">
       <div className="flex justify-content-between mb-5">
-        {/* TODO: 
+        {/* Todo:
           Esta parte del nombre y el icono de edit va a haber que hacer una validacion para que cuando le doy al boton de editar, me salga el input para el editado y el guardado del mismo
          */}
         <div>

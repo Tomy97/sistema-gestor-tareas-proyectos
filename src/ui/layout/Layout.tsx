@@ -7,7 +7,6 @@ import { MobileMenu } from '../components/MobileMenu'
 const Layout: React.FC = () => {
   return (
     <>
-      {/* !TODO: hacer header para mobile */}
       <div className="grid">
         <div className="col-fixed hidden xl:block">
           <SidebarMenu />
@@ -19,7 +18,6 @@ const Layout: React.FC = () => {
           <Outlet />
         </div>
       </div>
-      {/* footer */}
     </>
   )
 }
