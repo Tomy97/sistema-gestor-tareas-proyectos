@@ -11,21 +11,9 @@ import { MemberMultiSelect } from '../../projects/components/input/MemberMultiSe
 import { Project } from '../../../types/Project'
 import { Button } from 'primereact/button'
 import { v4 as uuidv4 } from 'uuid'
-import { Task } from '../../../types/Task'
 
 interface CreateTaskDialigProp {
   id: string
-}
-
-const initialValues = {
-  id: uuidv4(),
-  name: '',
-  description: '',
-  developerAssigned: null,
-  priority: '',
-  status: '',
-  dateCreated: new Date().toDateString(),
-  dateUpdated: new Date().toDateString()
 }
 
 const validationSchema = Yup.object({
@@ -46,13 +34,24 @@ export const CrateTaskDialog = ({ id }: CreateTaskDialigProp) => {
   }
 
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      id: uuidv4(),
+      name: '',
+      description: '',
+      developerAssigned: null,
+      priority: '',
+      status: '',
+      dateCreated: new Date().toDateString(),
+      dateUpdated: new Date().toDateString()
+    },
     validationSchema,
     onSubmit: (values) => {
+      console.log('valor', values)
       dispatch(createTask({
         projectId: id,
         task: values
       }))
+      formik.resetForm()
       handleCloseDialog(false)
     }
   })

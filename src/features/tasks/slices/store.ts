@@ -1,52 +1,48 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Task } from '../../../types/Task'
 import { Project } from '../../../types/Project'
+import { getItem, setItem } from '../../../utils/localStorage'
 
 export interface TaskState {
   visibility: boolean
+  tasks: Task[]
 }
 
 const initialState: TaskState = {
-  visibility: false
+  visibility: false,
+  tasks: []
 }
 
 
 const handleCreateTask = (state: TaskState, action: PayloadAction<{ projectId: string, task: Task }>) => {
   const { projectId, task } = action.payload
-  const projects: Project[] = JSON.parse(localStorage.getItem('projects') || '[]') as Project[]
+  const projects: Project[] = getItem('projects')
 
   let project: Project | undefined = projects.find((project: Project): boolean => project.id === projectId)
   if (project) {
     project.tasks.push(task)
-    localStorage.setItem('projects', JSON.stringify(projects))
+    setItem('projects', projects)
+    state.tasks.push(task)
   }
 }
 
 const handleDeleteTask = (state: TaskState, action: PayloadAction<string>) => {
   const id: string = action.payload
-  const projects: Project[] = JSON.parse(localStorage.getItem('projects') || '[]') as Project[]
+  const projects: Project[] = getItem('projects')
   const project = projects.find(project => project.tasks.some(task => task.id === id))
   if (project) {
     project.tasks = project.tasks.filter(task => task.id !== id)
-    console.log('se borro este tasks', project.tasks)
-    localStorage.setItem('projects', JSON.stringify(projects))
+    setItem('projects', projects)
+    state.tasks = state.tasks.filter(task => task.id !== id)
   }
 }
+
 export const useTaskSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
     setVisibility: (state: TaskState, action: PayloadAction<boolean>) => {
       state.visibility = action.payload
-    },
-    setTodo: (state: TaskState, action: PayloadAction<Task[]>) => {
-      state.todo = action.payload
-    },
-    setInProgress: (state: TaskState, action: PayloadAction<Task[]>) => {
-      state.inProgress = action.payload
-    },
-    setDone: (state: TaskState, action: PayloadAction<Task[]>) => {
-      state.done = action.payload
     },
     createTask: (state, action: PayloadAction<{ projectId: string, task: Task }>) => handleCreateTask(state, action),
     updateTaskStatus: (state, action: PayloadAction<{ id: string; status: string }>) => {
@@ -60,21 +56,6 @@ export const useTaskSlice = createSlice({
           target.push(task)
         }
       }
-
-      switch (status) {
-        case 'to-do':
-          findAndMoveTask(state.inProgress, state.todo)
-          findAndMoveTask(state.done, state.todo)
-          break
-        case 'in-progress':
-          findAndMoveTask(state.todo, state.inProgress)
-          findAndMoveTask(state.done, state.inProgress)
-          break
-        case 'done':
-          findAndMoveTask(state.todo, state.done)
-          findAndMoveTask(state.inProgress, state.done)
-          break
-      }
     },
     deleteTask: (state, action: PayloadAction<string>) => handleDeleteTask(state, action)
   }
@@ -82,9 +63,6 @@ export const useTaskSlice = createSlice({
 
 export const {
   setVisibility,
-  setDone,
-  setInProgress,
-  setTodo,
   createTask,
   updateTaskStatus,
   deleteTask
