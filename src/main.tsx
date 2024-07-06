@@ -3,11 +3,12 @@ import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 import { PrimeReactProvider } from "primereact/api"
 import App from "./App"
-import { store } from "./app/store"
+import { store, persistor } from "./app/store"
 import "primeflex/primeflex.css"
 import "primereact/resources/themes/lara-light-cyan/theme.css"
 import 'primeicons/primeicons.css'
 import './asset/base.css'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const container = document.getElementById("root")
 
@@ -17,9 +18,11 @@ if (container) {
   root.render(
     <StrictMode>
       <Provider store={store}>
-        <PrimeReactProvider>
-          <App />
-        </PrimeReactProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <PrimeReactProvider>
+            <App />
+          </PrimeReactProvider>
+        </PersistGate>
       </Provider>
     </StrictMode>,
   )

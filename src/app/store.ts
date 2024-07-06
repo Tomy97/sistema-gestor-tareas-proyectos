@@ -1,41 +1,60 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit"
-import { combineSlices, configureStore } from "@reduxjs/toolkit"
-import { setupListeners } from "@reduxjs/toolkit/query"
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
+import { combineSlices } from "@reduxjs/toolkit"
 import { useTaskSlice } from '../features/tasks/slices/store'
 import { useProjectSlice } from '../features/projects/slices/store'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { setupListeners } from '@reduxjs/toolkit/query'
 
-// `combineSlices` automatically combines the reducers using
-// their `reducerPath`s, therefore we no longer need to call `combineReducers`.
+// `combineSlices` automáticamente combina los reducers usando
+// sus `reducerPath`s, por lo tanto, ya no necesitamos llamar a `combineReducers`.
 const rootReducer = combineSlices({
   tasks: useTaskSlice.reducer,
   projects: useProjectSlice.reducer
 })
-// Infer the `RootState` type from the root reducer
+
+// Inferir el tipo de `RootState` desde el root reducer
 export type RootState = ReturnType<typeof rootReducer>
 
-// The store setup is wrapped in `makeStore` to allow reuse
-// when setting up tests that need the same store config
+// Configuración de persistencia
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+// La configuración del store se envuelve en `makeStore` para permitir reutilización
+// cuando se configuran pruebas que necesitan la misma configuración del store
 export const makeStore = (preloadedState?: Partial<RootState>) => {
   const store = configureStore({
-    reducer: rootReducer,
-    // Adding the api middleware enables caching, invalidation, polling,
-    // and other useful features of `rtk-query`.
-    middleware: getDefaultMiddleware => {
-      return getDefaultMiddleware().concat()
-    },
+    reducer: persistedReducer,
+    // Agregar el api middleware habilita caching, invalidación, polling,
+    // y otras características útiles de `rtk-query`.
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          // Ignorar estas acciones en la verificación de serializabilidad
+          ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+        },
+      }),
     preloadedState,
   })
-  // configure listeners using the provided defaults
-  // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
+
+  // Configurar listeners usando los defaults proporcionados
+  // opcional, pero requerido para `refetchOnFocus`/`refetchOnReconnect`
   setupListeners(store.dispatch)
   return store
 }
 
 export const store = makeStore()
 
-// Infer the type of `store`
+// Configurar el persistor
+export const persistor = persistStore(store)
+
+// Inferir el tipo de `store`
 export type AppStore = typeof store
-// Infer the `AppDispatch` type from the store itself
+// Inferir el tipo de `AppDispatch` desde el store
 export type AppDispatch = AppStore["dispatch"]
 export type AppThunk<ThunkReturnType = void> = ThunkAction<
   ThunkReturnType,
@@ -43,3 +62,7 @@ export type AppThunk<ThunkReturnType = void> = ThunkAction<
   unknown,
   Action
 >
+
+export default () => {
+  return { store, persistor }
+}

@@ -12,7 +12,7 @@ import { Project } from '../../../types/Project'
 import { Button } from 'primereact/button'
 import { v4 as uuidv4 } from 'uuid'
 
-interface CreateTaskDialigProp {
+interface TaskDialigProp {
   id: string
 }
 
@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
   developerAssigned: Yup.object().required('Debes seleccionar al menos un miembro')
 })
 
-export const CrateTaskDialog = ({ id }: CreateTaskDialigProp) => {
+export const TaskDialog = ({ id }: TaskDialigProp) => {
   const taskStore = useAppSelector(({ tasks }) => tasks)
   const projectStore: Project[] = useAppSelector(({ projects }) => projects)
   const dispatch = useAppDispatch()
