@@ -1,71 +1,103 @@
 html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 #app-sidebar-2 {
-  transition: width 0.5s ease;
+    transition: width 0.5s ease;
 }
 
 .sidebar-open {
-  width: 280px;
+    width: 280px;
 }
 
 .sidebar-closed {
-  width: 80px;
+    width: 80px;
 }
 
 .bullet_class {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
 }
 
 .text-primario {
-  color: #0d062d !important;
+    color: #0d062d !important;
 }
 
 .text-secundario {
-  color: #787486 !important;
+    color: #787486 !important;
 }
 
 .text-terciario {
-  color: #5030e5 !important;
+    color: #5030e5 !important;
 }
 
 .bg-primario:hover {
-  background-color: rgba(80, 48, 229, 0.08);
-  color: #0d062d !important;
-  font-weight: bold;
+    background-color: rgba(80, 48, 229, 0.08);
+    color: #0d062d !important;
+    font-weight: bold;
 }
 
 .bg-pills {
-  background-color: #5130e5;
+    background-color: #5130e5;
 }
 
 .column {
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
+    margin: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
 }
 
 .column h2 {
-  padding: 8px;
+    padding: 8px;
 }
 
 .task {
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  padding: 8px;
-  margin-bottom: 8px;
-  background-color: #d8727ca4;
-  display: flex;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #d8727ca4;
+    display: flex;
 }
 
+/*.card-wrapper {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    max-width: 25rem;*/
+/*    margin-bottom: 1.25rem; !* Same as mb-5 *!*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.card-dragger {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    border: 2px dotted transparent;*/
+/*    border-radius: 5px;*/
+/*    background-color: transparent;*/
+/*    transition: border-color 0.3s, background-color 0.3s;*/
+/*}*/
+
+/*.card-dragger.active {*/
+/*    border-color: #5130e5;*/
+/*    background-color: rgba(190, 174, 253, 0.59);*/
+/*}*/
+
+.card-wrapper {
+    width: 100%;
+    max-width: 25rem;
+    margin-bottom: 1.25rem; /* Same as mb-5 */
+    cursor: pointer;
+    transition: transform 0.3s, top 0.3s, left 0.3s; /* Smooth transitions */
+}

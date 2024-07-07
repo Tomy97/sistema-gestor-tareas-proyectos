@@ -57,7 +57,20 @@ export const useTaskSlice = createSlice({
         }
       }
     },
-    deleteTask: (state, action: PayloadAction<string>) => handleDeleteTask(state, action)
+    deleteTask: (state, action: PayloadAction<string>) => handleDeleteTask(state, action),
+    handleUpdateTaskStatus: (state, action: PayloadAction<{ id: string, status: string }>) => {
+      const { id, status } = action.payload
+      const projects: Project[] = getItem('projects')
+      const project = projects.find(project => project.tasks.some(task => task.id === id))
+      if (project) {
+        const taskIndex = project.tasks.findIndex(task => task.id === id)
+        project.tasks[taskIndex].status = status
+        setItem('projects', projects)
+        state.tasks = state.tasks.map(task =>
+          task.id === id ? { ...task, status } : task
+        )
+      }
+    }
   }
 })
 
@@ -65,5 +78,6 @@ export const {
   setVisibility,
   createTask,
   updateTaskStatus,
-  deleteTask
+  deleteTask,
+  handleUpdateTaskStatus
 } = useTaskSlice.actions

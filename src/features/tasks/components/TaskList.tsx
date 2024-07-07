@@ -30,6 +30,7 @@ export const TaskList: React.FC<{ id: string, task: Task }> = ({ id, task }: Tas
             key={index}
             status={status}
             tasks={tasks}
+            projectId={id}
           />
         ))}
       </div>

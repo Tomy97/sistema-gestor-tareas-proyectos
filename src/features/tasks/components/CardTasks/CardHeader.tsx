@@ -29,9 +29,7 @@ export const CardHeader = ({ status, priority, id }: CardHeaderProps) => {
         }
       </div>
       <div>
-        <Button icon="pi pi-trash" rounded aria-label="Filter" severity="danger" onClick={() => handleDeleteTask(id)}
-                className="z-1"
-        />
+        <Button icon="pi pi-trash" rounded aria-label="Filter" severity="danger" onClick={() => handleDeleteTask(id)} />
       </div>
     </div>
   )
