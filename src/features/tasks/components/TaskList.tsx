@@ -9,10 +9,9 @@ import { getItem } from '../../../utils/localStorage'
 
 interface TaskListProp {
   id: string
-  task?: Task
 }
 
-export const TaskList: React.FC<{ id: string, task: Task }> = ({ id, task }: TaskListProp) => {
+export const TaskList: React.FC<{ id: string }> = ({ id }: TaskListProp) => {
   const [items, setItems] = useState<Project[]>([])
   const statuses: string[] = ['to-do', 'in-progress', 'done']
   const taskStore: TaskState = useAppSelector(({ tasks }) => tasks)
@@ -25,7 +24,7 @@ export const TaskList: React.FC<{ id: string, task: Task }> = ({ id, task }: Tas
   return (
     <>
       <div className="block xl:flex gap-8 justify-content-center">
-        {statuses.map((status, index) => (
+        {statuses.map((status: string, index: number) => (
           <Section
             key={index}
             status={status}

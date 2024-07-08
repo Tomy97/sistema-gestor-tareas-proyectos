@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, CSSProperties } from 'react'
 import { Card } from 'primereact/card'
 import { CardHeader } from './CardHeader'
 import { CardFooter } from './CardFooter'
 import { Task } from '../../../../types/Task'
 import { useDrag } from 'react-dnd'
 import { useState } from 'react'
+import { setVisibilityViewTask, taskSelected } from '../../slices/store'
+import { useAppDispatch } from '../../../../app/hooks'
 
 interface CardProjectTaskProps {
   task: Task
@@ -13,6 +15,7 @@ interface CardProjectTaskProps {
 export const CardProjectTask = ({
                                   task
                                 }: CardProjectTaskProps) => {
+  const dispatch = useAppDispatch()
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
   const [{ isDragging, initialClientOffset, clientOffset }, drag] = useDrag(() => ({
@@ -23,7 +26,7 @@ export const CardProjectTask = ({
       initialClientOffset: monitor.getInitialClientOffset(),
       clientOffset: monitor.getClientOffset()
     }),
-    end: (item, monitor) => {
+    end: (_, monitor) => {
       const offset = monitor.getClientOffset()
       if (offset) {
         setPosition({ x: offset.x, y: offset.y })
@@ -31,24 +34,30 @@ export const CardProjectTask = ({
     }
   }))
 
-  const cardStyle = {
+  const cardStyle: CSSProperties = {
     position: isDragging ? 'absolute' : 'relative',
-    top: isDragging && position.y,
-    left: isDragging && position.x,
+    top: isDragging ? `${position.y}px` : 'auto',
+    left: isDragging ? `${position.x}px` : 'auto',
     cursor: isDragging ? 'grabbing' : 'pointer',
     zIndex: isDragging ? 1000 : 'auto',
-    transform: isDragging ? 'rotate(5deg)' : 'none' // Optional: adds a small rotation effect while dragging
+    transform: isDragging ? 'rotate(5deg)' : 'none'
   }
 
   useEffect(() => {
     if (isDragging && clientOffset && initialClientOffset) {
-      const xOffset = clientOffset.x - initialClientOffset.x;
-      const yOffset = clientOffset.y - initialClientOffset.y;
-      setPosition({ x: xOffset, y: yOffset });
+      const xOffset = clientOffset.x - initialClientOffset.x
+      const yOffset = clientOffset.y - initialClientOffset.y
+      setPosition({ x: xOffset, y: yOffset })
     }
-  }, [isDragging, clientOffset, initialClientOffset]);
+  }, [isDragging, clientOffset, initialClientOffset])
+
+  const handleVisibilityTask = (visibility: boolean, task: Task) => {
+    dispatch(setVisibilityViewTask(visibility))
+    dispatch(taskSelected(task))
+  }
   return (
-    <div ref={drag} className="card-wrapper relative" style={cardStyle}>
+    <div ref={drag} className="card-wrapper relative" style={cardStyle}
+         onClick={() => handleVisibilityTask(true, task)}>
       <div className={`card-dragger ${isDragging ? 'active' : ''}`} />
       <Card
         title={task.name}

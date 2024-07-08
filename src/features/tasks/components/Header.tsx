@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { BulletColor } from '../../../ui/components/BulletColor'
 import { Badge } from 'primereact/badge'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { setVisibility } from '../slices/store'
+import { setVisibilityCreateTask } from '../slices/store'
 
 interface HeaderProps {
   text: string
@@ -15,7 +15,7 @@ export const Header = ({ text, status, count }: HeaderProps) => {
   const dispatch = useAppDispatch()
 
   const handleOpenDialog = (val: boolean) => {
-    dispatch(setVisibility(val))
+    dispatch(setVisibilityCreateTask(val))
   }
 
   useEffect(() => {

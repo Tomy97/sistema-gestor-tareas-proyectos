@@ -9,7 +9,7 @@ import { Dropdown } from 'primereact/dropdown'
 interface MemberMultiSelectProps {
   label: string
   value: T[] | null
-  developerOption: DeveloperProject[]
+  developerOption: any[]
   onChange: (e: any) => void
   customClass: string
   isMultiple?: boolean

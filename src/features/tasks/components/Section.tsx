@@ -3,8 +3,9 @@ import { CardProjectTask } from './CardTasks/CardProjectTask'
 import { Task } from '../../../types/Task'
 import { useDrop } from 'react-dnd'
 import { Project } from '../../../types/Project'
-import { useAppDispatch } from '../../../app/hooks'
-import { handleUpdateTaskStatus } from '../slices/store'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { setVisibilityViewTask, taskSelected, updateTaskStatus } from '../slices/store'
+import { ViewTaskDialog } from './ViewDialog/ViewTaskDialog'
 
 interface SectionProps {
   tasks: Task[]
@@ -27,8 +28,9 @@ export const Section = ({
 
   const taskToMap: Task[] = tasks.filter((task: Task): boolean => task.status === status)
   const dispatch = useAppDispatch()
+  const taskStore = useAppSelector(({ tasks }) => tasks)
 
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [_, drop] = useDrop(() => ({
     accept: 'CARD',
     drop: (item: Task) => (addItemToSection(item)),
     collect: (monitor) => ({
@@ -37,22 +39,29 @@ export const Section = ({
   }))
 
   const addItemToSection = (task: Task): void => {
-    dispatch(handleUpdateTaskStatus({ id: task.id, status }))
+    dispatch(updateTaskStatus({ id: task.id, status }))
   }
+
   return (
-    <div
-      style={{ backgroundColor: '#F5F5F5' }}
-      className="border-round w-full xxl:w-23rem"
-      ref={drop}
-    >
-      <Header text={text} status={status} count={taskToMap.length} />
-      <div className="flex align-items-center flex-column justify-content-center">
-        {
-          taskToMap.map((task: Task) => (
-            <CardProjectTask key={task.id} task={task} />
-          ))
-        }
+    <>
+      <div
+        style={{ backgroundColor: '#F5F5F5' }}
+        className="border-round w-full xxl:w-23rem"
+        ref={drop}
+      >
+        <Header text={text} status={status} count={taskToMap.length} />
+        <div className="flex align-items-center flex-column justify-content-center">
+          {
+            taskToMap.map((task: Task) => (
+              <CardProjectTask key={task.id} task={task} />
+            ))
+          }
+        </div>
       </div>
-    </div>
+      {
+        taskStore.visibilityViewTask ?
+          <ViewTaskDialog visible={taskStore.visibilityViewTask} task={taskStore.taskSelected!} /> : null
+      }
+    </>
   )
 }

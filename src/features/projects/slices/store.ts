@@ -19,8 +19,14 @@ export const useProjectSlice = createSlice({
         return JSON.parse(projects)
       }
       return state
+    },
+    updateProjectName(state, action) {
+      const projectIndex = state.findIndex((project) => project.id === action.payload.id)
+      state[projectIndex].name = action.payload.name
+      localStorage.setItem('projects', JSON.stringify(state))
+      return state
     }
   }
 })
 
-export const { setProject, getProjects} = useProjectSlice.actions
+export const { setProject, getProjects, updateProjectName } = useProjectSlice.actions

@@ -101,7 +101,7 @@ export const SidebarMenu = () => {
                   <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
                   <div className="p-3 m-0 flex align-items-center justify-content-between">
                     <span className="text-xs font-bold uppercase text-secundario">
-                      My Projects
+                      Mis Proyectos
                     </span>
                     <Link to="/create-project" className="no-underline">
                       <i className="pi pi-plus-circle" />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog } from 'primereact/dialog'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { createTask, setVisibility } from '../slices/store'
+import { createTask, setVisibilityCreateTask } from '../slices/store'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Dropdown } from 'primereact/dropdown'
@@ -30,7 +30,7 @@ export const TaskDialog = ({ id }: TaskDialigProp) => {
   const dispatch = useAppDispatch()
 
   const handleCloseDialog = (val: boolean) => {
-    dispatch(setVisibility(val))
+    dispatch(setVisibilityCreateTask(val))
   }
 
   const formik = useFormik({
@@ -174,8 +174,8 @@ export const TaskDialog = ({ id }: TaskDialigProp) => {
           </div>
         </div>
         <div className="grid mt-2 justify-content-end">
-          <div className="col-3">
-            <Button type="submit" label="Crear Proyecto" className="bg-pills border-none" />
+          <div className="col-12 xl:col-3 xl:text-right">
+            <Button type="submit" label="Crear Proyecto" className="bg-pills border-none w-full" />
           </div>
         </div>
       </form>

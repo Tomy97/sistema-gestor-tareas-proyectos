@@ -5,14 +5,16 @@ import { TaskList } from '../../tasks/components/TaskList'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { Project } from '../../../types/Project'
 import type { T } from '../../../types/Generic'
-import { useEffect } from 'react'
-import { getProjects } from '../slices/store'
+import React, { useEffect, useState } from 'react'
+import { getProjects, updateProjectName } from '../slices/store'
+import { InputText } from 'primereact/inputtext'
 
 export const ProjectsViews = () => {
   const { id } = useParams()
   const projectStore: Project[] = useAppSelector((state) => state.projects)
   const dispatch = useAppDispatch()
   const project: Project | undefined = projectStore.find((project: Project): boolean => project.id === id)
+  const [editMode, setEditMode] = useState<boolean>(false)
 
   useEffect(() => {
     dispatch(getProjects())
@@ -26,20 +28,43 @@ export const ProjectsViews = () => {
 
   const membersToShow: T[] = project?.members.slice(0, 4)
   const remainingMembersCount: number = project?.members.length - 4
+
+  const handleEditMode = (val: boolean) => {
+    setEditMode(val)
+  }
+
+
+  const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateProjectName({ id: project.id, name: e.target.value }))
+  }
+
+
   return (
     <div className="p-5 w-full">
       <div className="flex justify-content-between mb-5">
-        {/* Todo:
-          Esta parte del nombre y el icono de edit va a haber que hacer una validacion para que cuando le doy al boton de editar, me salga el input para el editado y el guardado del mismo
-         */}
         <div>
-          <h1 className="text-primario">
-            {project.name}
-            <i className="pi pi-pen-to-square ml-5 cursor-pointer" />
-          </h1>
+          {
+            editMode ? (
+              <>
+                <h3 className="text-primario">Nuevo nombre del proyecto</h3>
+                <InputText
+                  onChange={(e) => handleProjectNameChange(e)}
+                  placeholder={project.name}
+                  autoFocus
+                  onBlur={() => handleEditMode(!editMode)}
+                />
+              </>
+            ) : (
+              <>
+                <h1 className="text-primario">
+                  {project.name}
+                  <i className="pi pi-pen-to-square ml-5 cursor-pointer text-terciario" onClick={() => handleEditMode(!editMode)} />
+                </h1>
+              </>
+            )
+          }
         </div>
         <div className="flex align-items-center text-terciario font-bold justify-content-end md:justify-content-center">
-          {/* // Todo: Para cuando se haga la aplicacion full stack hacer que esto mande un token por mail, para poder ingresar al projecto */}
           <AvatarGroup>
             {membersToShow.map((member: T, index: number) => (
               <Avatar
@@ -62,7 +87,7 @@ export const ProjectsViews = () => {
           </AvatarGroup>
         </div>
       </div>
-      <TaskList id={id ? id : '0' } />
+      <TaskList id={id!} />
     </div>
   )
 }

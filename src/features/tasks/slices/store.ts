@@ -1,83 +1,48 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Task } from '../../../types/Task'
-import { Project } from '../../../types/Project'
-import { getItem, setItem } from '../../../utils/localStorage'
+import { handleCreateTask, handleupdateTaskStatus, handleDeleteTask } from '../hook/useCrudTask'
 
 export interface TaskState {
   visibility: boolean
+  visibilityViewTask: boolean
   tasks: Task[]
+  taskSelected: Task | null
 }
 
 const initialState: TaskState = {
   visibility: false,
-  tasks: []
-}
-
-
-const handleCreateTask = (state: TaskState, action: PayloadAction<{ projectId: string, task: Task }>) => {
-  const { projectId, task } = action.payload
-  const projects: Project[] = getItem('projects')
-
-  let project: Project | undefined = projects.find((project: Project): boolean => project.id === projectId)
-  if (project) {
-    project.tasks.push(task)
-    setItem('projects', projects)
-    state.tasks.push(task)
-  }
-}
-
-const handleDeleteTask = (state: TaskState, action: PayloadAction<string>) => {
-  const id: string = action.payload
-  const projects: Project[] = getItem('projects')
-  const project = projects.find(project => project.tasks.some(task => task.id === id))
-  if (project) {
-    project.tasks = project.tasks.filter(task => task.id !== id)
-    setItem('projects', projects)
-    state.tasks = state.tasks.filter(task => task.id !== id)
-  }
+  visibilityViewTask: false,
+  tasks: [],
+  taskSelected: null
 }
 
 export const useTaskSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
-    setVisibility: (state: TaskState, action: PayloadAction<boolean>) => {
+    setVisibilityCreateTask: (state: TaskState, action: PayloadAction<boolean>) => {
       state.visibility = action.payload
     },
-    createTask: (state, action: PayloadAction<{ projectId: string, task: Task }>) => handleCreateTask(state, action),
-    updateTaskStatus: (state, action: PayloadAction<{ id: string; status: string }>) => {
-      const { id, status } = action.payload
-
-      const findAndMoveTask = (source: Task[], target: Task[]) => {
-        const index = source.findIndex(task => task.id === id)
-        if (index !== -1) {
-          const [task] = source.splice(index, 1)
-          task.status = status
-          target.push(task)
-        }
-      }
+    setVisibilityViewTask: (state: TaskState, action: PayloadAction<boolean>) => {
+      state.visibilityViewTask = action.payload
     },
+    createTask: (state, action: PayloadAction<{ projectId: string, task: Task }>) => handleCreateTask(state, action),
     deleteTask: (state, action: PayloadAction<string>) => handleDeleteTask(state, action),
-    handleUpdateTaskStatus: (state, action: PayloadAction<{ id: string, status: string }>) => {
-      const { id, status } = action.payload
-      const projects: Project[] = getItem('projects')
-      const project = projects.find(project => project.tasks.some(task => task.id === id))
-      if (project) {
-        const taskIndex = project.tasks.findIndex(task => task.id === id)
-        project.tasks[taskIndex].status = status
-        setItem('projects', projects)
-        state.tasks = state.tasks.map(task =>
-          task.id === id ? { ...task, status } : task
-        )
-      }
+    updateTaskStatus: (state, action: PayloadAction<{
+      id: string,
+      status: string
+    }>) => handleupdateTaskStatus(state, action),
+    taskSelected: (state, action: PayloadAction<Task | null>) => {
+      state.taskSelected = action.payload
     }
   }
 })
 
 export const {
-  setVisibility,
+  setVisibilityCreateTask,
+  setVisibilityViewTask,
   createTask,
-  updateTaskStatus,
   deleteTask,
-  handleUpdateTaskStatus
+  updateTaskStatus,
+  taskSelected
 } = useTaskSlice.actions
