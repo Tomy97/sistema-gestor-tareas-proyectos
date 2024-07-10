@@ -88,7 +88,7 @@ export const ProjectsViews = () => {
           </AvatarGroup>
         </div>
       </div>
-      <div className='grid gap-1 md:gap-4 xl:gap-5 justify-content-center overflow-y-scroll md:overflow-y-hidden'>
+      <div className='grid gap-1 md:gap-4 xl:gap-5 justify-content-center overflow-y-scroll md:overflow-y-hidden' style={{ height: '80vh' }}>
         <TaskList id={id!} />
       </div>
     </>

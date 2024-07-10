@@ -28,7 +28,6 @@ export const TaskList: React.FC<{ id: string }> = ({ id }: TaskListProp) => {
           key={index}
           status={status}
           tasks={tasks}
-          projectId={id}
         />
       ))}
       {
