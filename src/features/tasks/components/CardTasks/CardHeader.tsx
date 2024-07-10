@@ -16,21 +16,20 @@ export const CardHeader = ({ status, priority, id }: CardHeaderProps) => {
     dispatch(deleteTask(id))
   }
   return (
-    <div className="flex justify-content-between align-items-center px-3">
-      <div>
-        {
-          status !== 'done' ? (
-            <>
-              <TagPriority priority={priority} />
-            </>
-          ) : (
-            <TagStatus status={status} priority={priority} />
-          )
-        }
-      </div>
-      <div>
-        <Button icon="pi pi-trash" rounded aria-label="Filter" severity="danger" onClick={() => handleDeleteTask(id)} />
-      </div>
+    <div className="flex justify-content-between align-items-center p-3 pb-0">
+      {
+        status !== 'done' ? (
+          <>
+            <TagPriority priority={priority} />
+          </>
+        ) : (
+          <TagStatus status={status} priority={priority} />
+        )
+      }
+      <i
+        className="pi pi-trash text-red-500 font-medium cursor-pointer"
+        onClick={() => handleDeleteTask(id)}
+      />
     </div>
   )
 }

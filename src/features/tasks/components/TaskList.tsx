@@ -23,16 +23,14 @@ export const TaskList: React.FC<{ id: string }> = ({ id }: TaskListProp) => {
   }, [taskStore.tasks])
   return (
     <>
-      <div className="block xl:flex gap-8 justify-content-center">
-        {statuses.map((status: string, index: number) => (
-          <Section
-            key={index}
-            status={status}
-            tasks={tasks}
-            projectId={id}
-          />
-        ))}
-      </div>
+      {statuses.map((status: string, index: number) => (
+        <Section
+          key={index}
+          status={status}
+          tasks={tasks}
+          projectId={id}
+        />
+      ))}
       {
         taskStore.visibility ? <TaskDialog id={id} /> : null
       }

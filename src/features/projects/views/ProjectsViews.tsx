@@ -40,7 +40,7 @@ export const ProjectsViews = () => {
 
 
   return (
-    <div className="p-5 w-full">
+    <>
       <div className="flex justify-content-between mb-5">
         <div>
           {
@@ -58,7 +58,8 @@ export const ProjectsViews = () => {
               <>
                 <h1 className="text-primario">
                   {project.name}
-                  <i className="pi pi-pen-to-square ml-5 cursor-pointer text-terciario" onClick={() => handleEditMode(!editMode)} />
+                  <i className="pi pi-pen-to-square ml-5 cursor-pointer text-terciario"
+                     onClick={() => handleEditMode(!editMode)} />
                 </h1>
               </>
             )
@@ -87,7 +88,9 @@ export const ProjectsViews = () => {
           </AvatarGroup>
         </div>
       </div>
-      <TaskList id={id!} />
-    </div>
+      <div className='grid gap-1 md:gap-4 xl:gap-5 justify-content-center overflow-y-scroll md:overflow-y-hidden'>
+        <TaskList id={id!} />
+      </div>
+    </>
   )
 }

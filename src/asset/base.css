@@ -69,35 +69,7 @@ html {
     display: flex;
 }
 
-/*.card-wrapper {*/
-/*    position: relative;*/
-/*    width: 100%;*/
-/*    max-width: 25rem;*/
-/*    margin-bottom: 1.25rem; !* Same as mb-5 *!*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.card-dragger {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    border: 2px dotted transparent;*/
-/*    border-radius: 5px;*/
-/*    background-color: transparent;*/
-/*    transition: border-color 0.3s, background-color 0.3s;*/
-/*}*/
-
-/*.card-dragger.active {*/
-/*    border-color: #5130e5;*/
-/*    background-color: rgba(190, 174, 253, 0.59);*/
-/*}*/
-
 .card-wrapper {
-    width: 100%;
-    max-width: 25rem;
-    margin-bottom: 1.25rem; /* Same as mb-5 */
     cursor: pointer;
-    transition: transform 0.3s, top 0.3s, left 0.3s; /* Smooth transitions */
+    transition: transform 0.2s, top 0.2s, left 0.2s; /* Smooth transitions */
 }

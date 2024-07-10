@@ -61,7 +61,7 @@ export const CardProjectTask = ({
       <div className={`card-dragger ${isDragging ? 'active' : ''}`} />
       <Card
         title={task.name}
-        className="text-primario py-4 px-2 w-full xl:w-25rem mb-5 cursor-pointer"
+        className="text-primario py-4 w-20rem px-2 mb-5 cursor-pointer"
         header={<CardHeader status={task.status} priority={task.priority} key={task.id} id={task.id} />}
         footer={<CardFooter developerAssigment={task.developerAssigned!} />}
       >
