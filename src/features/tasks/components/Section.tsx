@@ -52,7 +52,7 @@ export const Section = ({
       >
         <Header text={text} status={status} count={taskToMap.length} />
         <div
-          style={{ flexGrow: 1, overflowY: 'auto', height: '80vh' }}
+          style={{ flexGrow: 1, overflowY: 'auto', height: '80vh', scrollbarWidth: 'thin'}}
           className="task-list"
         >
           <div className="flex align-items-center flex-column justify-content-center">

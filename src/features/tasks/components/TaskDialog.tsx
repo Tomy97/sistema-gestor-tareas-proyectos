@@ -46,7 +46,6 @@ export const TaskDialog = ({ id }: TaskDialigProp) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log('valor', values)
       dispatch(createTask({
         projectId: id,
         task: values
