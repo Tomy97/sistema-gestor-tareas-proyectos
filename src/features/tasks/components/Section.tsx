@@ -45,14 +45,14 @@ export const Section = ({
           backgroundColor: '#F5F5F5',
           display: 'flex',
           flexDirection: 'column',
-          height: '80vh'
+          height: '81vh'
         }}
-        className="border-round w-23rem relative"
+        className="border-round w-23rem md:w-17rem xl:w-23rem relative"
         ref={drop}
       >
         <Header text={text} status={status} count={taskToMap.length} />
         <div
-          style={{ flexGrow: 1, overflowY: 'auto', height: '80vh', scrollbarWidth: 'thin'}}
+          style={{ flexGrow: 1, overflowY: 'auto', scrollbarWidth: 'thin'}}
           className="task-list"
         >
           <div className="flex align-items-center flex-column justify-content-center">

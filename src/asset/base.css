@@ -73,3 +73,16 @@ html {
     cursor: pointer;
     transition: transform 0.2s, top 0.2s, left 0.2s; /* Smooth transitions */
 }
+
+.height-80 {
+    @media only screen and (max-height: 1464px) {
+        height: 80vh;
+    }
+}
+
+.p-card .p-card-title {
+    font-size: 1.5rem;
+    @media only screen and (max-height: 1464px) {
+        font-size: 1.2rem;
+    }
+}

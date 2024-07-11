@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import '../../asset/base.css'
@@ -9,6 +9,7 @@ import type { Menu } from '../types/menu'
 
 import { BulletColor } from './BulletColor'
 import { Logo } from '../components/Logo'
+import { useWindowSize } from 'react-use'
 
 export const SidebarMenu = () => {
   const [reduceSidebar, setReduceSidebar] = useState<boolean>(false)
@@ -19,6 +20,7 @@ export const SidebarMenu = () => {
       to: '/'
     }
   ]
+  const { width } = useWindowSize()
 
   const isLogged = false
 
@@ -48,6 +50,15 @@ export const SidebarMenu = () => {
 
   const projects = localStorage.getItem('projects')
   const projectList = JSON.parse(projects || '[]')
+
+  useEffect(() => {
+    if (width < 1464) {
+      setReduceSidebar(true)
+    }
+    if (width > 1464) {
+      setReduceSidebar(false)
+    }
+  }, [width])
 
   return (
     <div className="card">
@@ -96,9 +107,43 @@ export const SidebarMenu = () => {
                   )
                 })}
               </ul>
-              {reduceSidebar ? null : (
+              {reduceSidebar ? (
                 <>
-                  <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
+                  <hr className="mb-3 border-top-1 border-none surface-border" />
+                  <div className="p-3 m-0 flex align-items-center justify-content-between">
+                    <span className="text-xs font-bold uppercase text-secundario">
+                      M.P
+                    </span>
+                    <Link to="/create-project" className="no-underline">
+                      <i className="pi pi-plus-circle" />
+                    </Link>
+                  </div>
+                  {/*Aca voy a hacer el mapeo de los proyectos, que solo van a mostrar los 2 pimeros y un boton del color del proyecto*/}
+                  {
+                    projectList.length > 0 ? (
+                      <ul className="list-none py-3 pl-0 m-0">
+                        {projectList.map((project: any) => {
+                          return (
+                            <li key={project.name}>
+                              <Link
+                                to={`/projects/${project.id}`}
+                                className="flex align-items-center justify-content-between cursor-pointer py-3 px-3 border-round text-700 hover:surface-100 hover:text-primario transition-duration-150 transition-colors w-full p-ripple no-underline text-secundario"
+                              >
+                                <div className="flex align-items-center">
+                                  <BulletColor backgroundColor={project.color} />
+                                  <span className="font-medium">{project.name.substring(0, 2)}</span>
+                                </div>
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    ) : null
+                  }
+                </>
+              ) : (
+                <>
+                  <hr className="mb-3 border-top-1 border-none surface-border" />
                   <div className="p-3 m-0 flex align-items-center justify-content-between">
                     <span className="text-xs font-bold uppercase text-secundario">
                       Mis Proyectos
