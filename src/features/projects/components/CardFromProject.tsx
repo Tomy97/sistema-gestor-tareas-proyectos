@@ -107,7 +107,7 @@ export const CardFromProject = () => {
             />
           </div>
           <div className="col-12 md:col-4">
-            <Button label="Crear Proyecto" type="submit" className="w-full" />
+            <Button label="Crear Proyecto" type="submit" className="w-full bg-pills border-none" />
           </div>
         </div>
       </form>

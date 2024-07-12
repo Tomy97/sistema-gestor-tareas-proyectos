@@ -22,18 +22,17 @@ export const DashboardViews = () => {
           Mis Proyectos
         </h3>
       </div>
-      <div className="flex">
+      <div className="projects-grid">
         {
           projectStore.map((project: Project, index: number) => (
-            <Link to={`/projects/${project.id}`} className="col-3 no-underline" key={index}>
+            <Link to={`/projects/${project.id}`} className="project-link" key={index}>
               <ProjectCard project={project} />
             </Link>
           ))
         }
-        <div className="col-3">
+        <div className="project-link">
           <Link to="/create-project" className='no-underline'>
-            <div
-              className="new-project-card cursor-pointer flex justify-content-center align-items-center">
+            <div className="new-project-card cursor-pointer flex justify-content-center align-items-center">
               <i className="pi pi-plus-circle text-3xl" />
             </div>
           </Link>

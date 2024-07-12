@@ -6,12 +6,22 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
+  const footerProject = (deadline: string) => {
+    return (
+      <div className="ml-6">
+        <span className="font-semibold">
+          Fecha límite: {new Date(deadline).toLocaleDateString()}
+        </span>
+      </div>
+    )
+  }
   return (
-    <Card title={project.name} className="text-primario relative test-title">
-      <div className='ml-6'>
-          <span className="font-semibold">
-            Fecha límite: {new Date(project.date).toLocaleDateString()}
-          </span>
+    <Card footer={footerProject(project.date)}
+          className="text-primario relative h-9rem">
+      <div className="ml-6">
+        <h3 className="m-0">
+          {project.name}
+        </h3>
       </div>
       <div className="background-border-color" style={{ backgroundColor: project.color }}></div>
     </Card>
