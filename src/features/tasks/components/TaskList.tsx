@@ -8,14 +8,14 @@ import { Task } from '../../../types/Task'
 import { getItem } from '../../../utils/localStorage'
 
 interface TaskListProp {
-  id: string
+  projectId: string
 }
 
-export const TaskList: React.FC<{ id: string }> = ({ id }: TaskListProp) => {
+export const TaskList: React.FC<{ projectId: string }> = ({ projectId }: TaskListProp) => {
   const [items, setItems] = useState<Project[]>([])
   const statuses: string[] = ['to-do', 'in-progress', 'done']
   const taskStore: TaskState = useAppSelector(({ tasks }) => tasks)
-  const tasks: Task[] = items.find(project => project.id === id)?.tasks || []
+  const tasks: Task[] = items.find(project => project.id === projectId)?.tasks || []
 
   useEffect(() => {
     const projects = getItem('projects')
@@ -31,7 +31,7 @@ export const TaskList: React.FC<{ id: string }> = ({ id }: TaskListProp) => {
         />
       ))}
       {
-        taskStore.visibility ? <TaskDialog id={id} /> : null
+        taskStore.visibility || taskStore.visibilityViewTask ? <TaskDialog projectId={projectId} /> : null
       }
     </>
   )

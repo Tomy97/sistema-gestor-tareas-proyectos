@@ -52,7 +52,7 @@ export const CardProjectTask = ({
   }, [isDragging, clientOffset, initialClientOffset])
 
   const handleVisibilityTask = (visibility: boolean, task: Task) => {
-    dispatch(setVisibilityViewTask(visibility))
+    dispatch(setVisibilityViewTask({ visibility: visibility, taskId: task.id }))
     dispatch(taskSelected(task))
   }
   return (

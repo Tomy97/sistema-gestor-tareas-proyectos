@@ -41,7 +41,7 @@ export const ProjectsViews = () => {
 
   return (
     <>
-      <div className="flex justify-content-between mb-5">
+      <div className="flex flex-column md:flex-row justify-content-between mb-5 px-2 lg:px-5">
         <div>
           {
             editMode ? (
@@ -66,30 +66,35 @@ export const ProjectsViews = () => {
           }
         </div>
         <div className="flex align-items-center text-terciario font-bold justify-content-end md:justify-content-center">
-          <AvatarGroup>
-            {membersToShow.map((member: T, index: number) => (
-              <Avatar
-                key={index}
-                label={member.name.charAt(0)}
-                size="large"
-                className="bg-pills text-white cursor-pointer"
-                shape="circle"
-              />
-            ))}
-            {remainingMembersCount > 0 && (
-              <Avatar
-                label={`+${remainingMembersCount}`}
-                size="large"
-                className="bg-pills cursor-pointer text-white"
-                shape="circle"
+          <div>
+            <h3 className='text-primario'>
+              {membersToShow.length === 1 ? 'Miembro' : 'Miembros'} del proyecto
+            </h3>
+            <AvatarGroup>
+              {membersToShow.map((member: T, index: number) => (
+                <Avatar
+                  key={index}
+                  label={member.name.charAt(0)}
+                  size="large"
+                  className="bg-pills text-white cursor-pointer"
+                  shape="circle"
+                />
+              ))}
+              {remainingMembersCount > 0 && (
+                <Avatar
+                  label={`+${remainingMembersCount}`}
+                  size="large"
+                  className="bg-pills cursor-pointer text-white"
+                  shape="circle"
 
-              />
-            )}
-          </AvatarGroup>
+                />
+              )}
+            </AvatarGroup>
+          </div>
         </div>
       </div>
       <div className='grid gap-1 md:gap-4 xl:gap-5 justify-content-center overflow-y-scroll md:overflow-y-hidden height-80'>
-        <TaskList id={id!} />
+        <TaskList projectId={id!} />
       </div>
     </>
   )

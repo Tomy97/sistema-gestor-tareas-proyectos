@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog } from 'primereact/dialog'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { createTask, setVisibilityCreateTask } from '../slices/store'
+import { createTask, setVisibilityCreateTask, setVisibilityViewTask, updateTask } from '../slices/store'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Dropdown } from 'primereact/dropdown'
@@ -13,7 +13,7 @@ import { Button } from 'primereact/button'
 import { v4 as uuidv4 } from 'uuid'
 
 interface TaskDialigProp {
-  id: string
+  projectId: string
 }
 
 const validationSchema = Yup.object({
@@ -24,34 +24,42 @@ const validationSchema = Yup.object({
   developerAssigned: Yup.object().required('Debes seleccionar al menos un miembro')
 })
 
-export const TaskDialog = ({ id }: TaskDialigProp) => {
+export const TaskDialog = ({ projectId }: TaskDialigProp) => {
   const taskStore = useAppSelector(({ tasks }) => tasks)
   const projectStore: Project[] = useAppSelector(({ projects }) => projects)
   const dispatch = useAppDispatch()
 
-  const handleCloseDialog = (val: boolean) => {
+  const handleCloseDialog = (val: boolean, id?: string) => {
+    if (id) {
+      dispatch(setVisibilityViewTask({ visibility: val, taskId: id}))
+    }
     dispatch(setVisibilityCreateTask(val))
   }
 
   const formik = useFormik({
     initialValues: {
-      id: uuidv4(),
-      name: '',
-      description: '',
-      developerAssigned: null,
-      priority: '',
-      status: '',
+      id: taskStore.taskSelected ? taskStore.taskSelected.id : uuidv4(),
+      name: taskStore.taskSelected ? taskStore.taskSelected.name :'',
+      description: taskStore.taskSelected ? taskStore.taskSelected.description :'',
+      developerAssigned: taskStore.taskSelected ? taskStore.taskSelected.developerAssigned : null,
+      priority: taskStore.taskSelected ? taskStore.taskSelected.priority :'',
+      status: taskStore.taskSelected ? taskStore.taskSelected.status :'',
       dateCreated: new Date().toDateString(),
       dateUpdated: new Date().toDateString()
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(createTask({
-        projectId: id,
-        task: values
-      }))
+
+      if (taskStore.taskSelected?.id) {
+        dispatch(updateTask(values))
+      } else {
+        dispatch(createTask({
+          projectId: projectId,
+          task: values
+        }))
+      }
       formik.resetForm()
-      handleCloseDialog(false)
+      handleCloseDialog(false, taskStore.taskSelected?.id)
     }
   })
 
@@ -67,16 +75,15 @@ export const TaskDialog = ({ id }: TaskDialigProp) => {
     { label: 'Baja', value: 'low' }
   ]
 
-  const project: Project | undefined = projectStore.find(elem => elem.id === id)
+  const project: Project | undefined = projectStore.find(elem => elem.id === projectId)
   let getMemberProject: any[] = []
   if (project !== undefined) {
     getMemberProject = project.members
   }
 
   return (
-    <Dialog header="Crear Tarea" visible={taskStore.visibility} className="w-full md:w-6" onHide={() => {
-      if (!taskStore.visibility) return
-      handleCloseDialog(false)
+    <Dialog header={taskStore.taskSelected ? 'Tarea Seleccionada' : 'Crear Tarea'} visible={taskStore.visibility || taskStore.visibilityViewTask} className="w-full md:w-6" onHide={() => {
+      handleCloseDialog(false, formik.values.id)
     }}>
       <form onSubmit={formik.handleSubmit}>
         <div className="grid">
@@ -174,7 +181,7 @@ export const TaskDialog = ({ id }: TaskDialigProp) => {
         </div>
         <div className="grid mt-2 justify-content-end">
           <div className="col-12 xl:col-3 xl:text-right">
-            <Button type="submit" label="Crear Proyecto" className="bg-pills border-none w-full" />
+            <Button type="submit" label={ taskStore.taskSelected ? 'Editar Tarea' : 'Crear Tarea' } className="bg-pills border-none w-full" />
           </div>
         </div>
       </form>

@@ -64,10 +64,6 @@ export const Section = ({
           </div>
         </div>
       </div>
-      {
-        taskStore.visibilityViewTask ?
-          <ViewTaskDialog visible={taskStore.visibilityViewTask} task={taskStore.taskSelected!} /> : null
-      }
     </>
   )
 }

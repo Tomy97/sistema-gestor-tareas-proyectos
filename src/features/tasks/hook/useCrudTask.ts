@@ -35,8 +35,22 @@ export const handleupdateTaskStatus = (state: TaskState, action: PayloadAction<{
     const taskIndex = project.tasks.findIndex(task => task.id === id)
     project.tasks[taskIndex].status = status
     setItem('projects', projects)
-    state.tasks = state.tasks.map(task =>
+    state.tasks = state.tasks.map((task: Task) =>
       task.id === id ? { ...task, status } : task
+    )
+  }
+}
+
+export const handleUpdateTask = (state: TaskState, action: PayloadAction<Task>): void => {
+  const task: Task = action.payload
+  const projects: Project[] = getItem('projects')
+  const project: Project | undefined = projects.find((project: Project) => project.tasks.some(t => t.id === task.id))
+  if (project) {
+    const taskIndex: number = project.tasks.findIndex((t: Task): boolean => t.id === task.id)
+    project.tasks[taskIndex] = task
+    setItem('projects', projects)
+    state.tasks = state.tasks.map((t: Task): Task =>
+      t.id === task.id ? task : t
     )
   }
 }
